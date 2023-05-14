@@ -27,11 +27,18 @@ header > h1{
 
 
 nav > ul {
-  display:grid;
-  grid-auto-flow: column;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-evenly;
   list-style: none;
   padding: 10px;
   
+}
+
+nav > ul > li{
+    flex: 1 auto;
 }
 
 nav > ul > li > a {
