@@ -7,9 +7,9 @@
     <title>Log in</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body style="padding:0">
     <header>
-        <h1>CSC 317 Website</h1>
+        <h1 style ="margin: 0">CSC 317 Website</h1>
         <nav>
             <ul>
                 <li><a href="Index.html" rel ="noreferrer noopener" target="_blank">
@@ -32,26 +32,31 @@
 
         <h2>Login Form</h2>
         <form>
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" 
-            placeholder="Username">
-
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" 
-            placeholder="Password">
-
-            <input type="submit" value="Login">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input 
+                type="text" 
+                name="username" 
+                id="username" 
+                placeholder="Username"
+                class="input-text">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input 
+                type="password" 
+                name="password" 
+                id="password" 
+                placeholder="Password"
+                class="input-text">
+            </div>
+            
+            <input type="submit" value="Login" class="form-button">
         </form>
     </main>
 
-    <footer id="footer">
-        <address>
-            1600 Holloway Ave  
-            San Francisco, CA
-            94132 415-338-1000
-        </address>
-        
-        Vignesh Guruswami 
+    <footer id="footer" class="site-footer">
+        Vignesh Guruswami &copy 2023
     </footer>
 </body>
 </html>

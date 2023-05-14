@@ -7,9 +7,9 @@
     <title>Registration</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body style="padding:0">
     <header>
-        <h1>CSC 317 Website</h1>
+        <h1 style ="margin: 0">CSC 317 Website</h1>
         <nav>
             <ul>
                 <li><a href="Index.html" rel ="noreferrer noopener" target="_blank">
@@ -32,54 +32,62 @@
         <h2>Registration</h2>
 
         <form>
-            <div>
+            <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" name="username" id="username" 
-                placeholder="Username">
+                <input 
+                type="text" 
+                name="username" 
+                id="username" 
+                placeholder="Username" 
+                class="input-text">
             </div>
-            <div>
+            <div class="input-group">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email"
-                placeholder="Email">
+                <input 
+                type="text" 
+                name="email" 
+                id="email"
+                placeholder="Email" 
+                class="input-text">
             </div>
-            <div>
+            <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" 
-                placeholder="Password">
+                <input 
+                type="password" 
+                name="password" 
+                id="password" 
+                placeholder="Password" 
+                class="input-text">
             </div>
-            <div>
+            <div class="input-group">
                 <label for="confirm_password">Confirm Password</label>
-                <input type="password" name="confirm_password" id="confirm_password"
-                placeholder="Confirm password"> 
+                <input 
+                type="password"
+                name="confirm_password" 
+                id="confirm_password"
+                placeholder="Confirm password" 
+                class="input-text"> 
             </div>
 
-            <div>
+            <div class="checkbox-group">
                 <label for="age_req">Confirm that you are at least 13 years of age</label>
                 <input type="checkbox" name="age_req" id="age_req">
             </div>
 
-            <div>
+            <div class="checkbox-group">
                 <label for="tos"> <a href="nowhere.html" rel ="noreferrer noopener" target="_blank">
                     Accept Terms of Service and Privacy Rules</a></label>
                 <input type="checkbox" name="tos" id="tos">
             </div>
 
-
-
-            <input type="submit" value="Submit">
+            <input type="submit" value="Register" class="form-button">
 
         </form>
 
     </main>
 
-    <footer id="footer">
-        <address>
-            1600 Holloway Ave  
-            San Francisco, CA
-            94132 415-338-1000
-        </address>
-        
-        Vignesh Guruswami 
+    <footer id="footer" class= site-footer>
+        Vignesh Guruswami &copy 2023
     </footer>
 </body>
 </html>
