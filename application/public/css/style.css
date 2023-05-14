@@ -59,7 +59,7 @@ body {
 form{
   display:grid;
   grid-auto-flow: row;
-  gap: 4px;
+  gap: 8px;
   text-align: center;
   justify-items: center;
   
