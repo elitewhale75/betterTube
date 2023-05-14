@@ -16,17 +16,20 @@ html{
 }
 
 header{
+  /*Top of Page*/
   color:whitesmoke;
   background-color: var(--site-theme);
   margin: 0;
 }
 
 header > h1{
+  /*Page Banner*/
   text-align: center;
 }
 
 
 nav > ul {
+  /*Flex Navbar for Desktop*/
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
@@ -38,10 +41,12 @@ nav > ul {
 }
 
 nav > ul > li{
+  /*List Elements. Fills Horizontal Space*/
     flex: 1 auto;
 }
 
 nav > ul > li > a {
+  /*Anchor Tags*/
   text-decoration: none;
   color:whitesmoke;
   display:inline-block;
@@ -50,6 +55,7 @@ nav > ul > li > a {
 }
 
 nav > ul > li > a:hover {
+  /*Mouse over Anchor tags*/
   background-color: rgb(18,17,124);
   border-radius: var(--text-rounded-corners);
 }
@@ -123,3 +129,20 @@ input:hover, button:hover{
   padding: 12px;
   margin:10px;
 }
+
+/*
+For mobile view set flex direction to column for main layout. Children is case by case
+
+In CSS anything not in a media query is either general layout things or for mobile view
+
+Position fixed takes out of dom
+Left -120% to take off screen
+Can bring back in with Left 0%
+transition all 300 ms ease in out
+ideally unfocus background content
+Hamburger pop in for nav bar extra credit for fully responsive design
+li:nth-child(index){} to affect individual elements can be used to make certain elements grow
+
+@media screen and (min width some pixel count){} can be used to design for mobile, tablet, and desktop
+
+*/
