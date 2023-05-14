@@ -43,7 +43,8 @@ nav > ul > li > a {
 }
 
 nav > ul > li > a:hover {
-  background-color: rgb(0, 0, 174);
+  background-color: rgb(18,17,124);
+  border-radius: var(--text-rounded-corners);
 }
 
 body {
