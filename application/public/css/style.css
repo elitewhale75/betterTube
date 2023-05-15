@@ -79,12 +79,18 @@ form{
 }
 
 .input-group{
+  font-weight: 900;
   display:flex;
   flex-direction: column;
   gap: 4px;
 }
 
+.input-text:focus{
+  outline:none;
+}
+
 .input-text{
+  font-weight: 600;
   transition: transform 150ms ease-in-out;
   border-radius: var(--text-rounded-corners);
   border: 1.5px solid black;
@@ -93,6 +99,23 @@ form{
   height: 20px;
   align-self: center;
   box-shadow:  -2px 2px 5px black;
+  
+}
+
+.valid-text{
+   border: 3.5px solid green;
+   box-shadow: none;
+
+}
+
+.invalid-text{
+  border: 3.5px solid red;
+  box-shadow: none;
+}
+
+input:hover, button:hover{
+  cursor:pointer;
+  box-shadow:0 0 3px#00B7FF;
   
 }
 
@@ -116,11 +139,7 @@ button:active{
   box-shadow:  2px -2px 5px black;
 }
 
-input:hover, button:hover{
-  cursor:pointer;
-  box-shadow:0 0 3px#00B7FF;
-  
-}
+
 
 .site-footer{
   color: whitesmoke;
