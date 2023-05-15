@@ -111,7 +111,6 @@ document.getElementById('reg-form').addEventListener('submit', function (ev){
     if(validateUsername() == "valid" &&
         validatePassword() == "valid" &&
         confirmPassword() == "valid"){
-        console.log("submitted val")
         ev.currentTarget.submit;
     }
 });
