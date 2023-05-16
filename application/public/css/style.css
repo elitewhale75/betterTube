@@ -16,6 +16,7 @@ header{
   color:whitesmoke;
   background-color: var(--site-theme);
   margin: 0;
+  padding:10px;
 }
 
 /*Page Banner*/
@@ -26,13 +27,15 @@ header > h1{
 
 /*Flex Navbar for Desktop*/
 nav > ul {
+  background-color: var(--site-theme);
+  margin:0;
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
   align-content: flex-start;
   justify-content: space-evenly;
   list-style: none;
-  padding: 10px;
+  padding: 20px;
   
 }
 
@@ -54,7 +57,7 @@ nav > ul > li > a {
 
 /*Mouse over Anchor tags*/
 nav > ul > li > a:hover {
-  
+  margin:0;
   background-color: rgb(18,17,124);
   border-radius: var(--text-rounded-corners);
 }
