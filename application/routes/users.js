@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../conf/database');
-
+var bcrypt = require('bcrypt');
 
 //Register Form Route Handler
 router.post('/registration', async function(req, res, next) {
@@ -11,24 +11,27 @@ router.post('/registration', async function(req, res, next) {
   try{
     var [rows, fields] = await db.execute(`select id from users where username =?;`, [username]);
     if(rows && rows.length > 0){
-      console.log(username + " already exists");
       return res.redirect('/registration');
     }
 
     //Email Check These two would be better as middleware functions
     var [rows, fields] = await db.execute(`select id from users where email =?;`, [email]);
     if(rows && rows.length > 0){
-      console.log(email + " already in use");
       return res.redirect('/registration');
     }
+
+    var hashedPassword = await bcrypt.hash(password,3);
+
   }catch(error){
     next(error);
   }
   
   //Insert into DB
-  var[resultObject, fields] = await db.execute(`INSERT INTO USERS (username, email, password)
-  VALUE
-  (?,?,?);`, [username, email, password]);
+  var[resultObject, fields] = await db.execute(
+    `INSERT INTO USERS (username, email, password)
+    VALUE
+    (?,?,?);`, 
+    [username, email, hashedPassword]);
 
   //Respond
   if(resultObject && resultObject.affectedRows == 1){
@@ -41,25 +44,36 @@ router.post('/registration', async function(req, res, next) {
 
 //Login Request Handler
 router.post('/login', async function(req, res, next){
-  var {username,password} = req.body;
+  const {username,password} = req.body;
 
-  try {
-    
-    // Username check from DB Take off Password When Using Bcrypt
-    var [rows, fields] = await db.execute(`select id from users where username =? 
-    AND password =?;`, [username,password]);
-
-    if(rows && rows.length == 0){
-      console.log(username + "doesn't exists");
-      return res.redirect('/registration');
-    }else{
-      return res.redirect('/');
+  if(!username || !password)
+    return res.redirect('/login');
+  else{
+    try {
+      // Username check from DB Take off Password When Using Bcrypt
+      var [rows, fields] = await db.execute
+        (`select id,username,password,email from users where username =?;`, 
+        [username]
+      );
+      
+      var user = rows[0];
+      if(!user){
+        return res.redirect('/login');
+      }else{
+        var passwordsMatch = await bcrypt.compare(password, user.password)
+        if(passwordsMatch)
+          return res.redirect('/');
+        else
+          return res.redirect('/login');
+      }
+    } catch (error) {
+      next(error);
     }
-  } catch (error) {
-    next(error);
   }
+});
 
-  res.end();
+router.post('/logout', function(req,res,end){
+
 });
 
 module.exports = router;
