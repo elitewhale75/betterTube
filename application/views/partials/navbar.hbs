@@ -1,16 +1,23 @@
+<!--44:02 for Drop Down Logouts are Post-->
+
 <nav>
     <ul>
-        <li><a href="/" rel ="noreferrer noopener">
-            Home</a></li>
+        <li><a href="/" rel="noreferrer noopener">
+                Home</a></li>
+
+        {{#if isLoggedIn}}
+            
+        {{else}}
         <li><a href="/login" rel="noreferrer noopener">
             Login</a></li>
-        <li><a href="/registration" rel ="noreferrer noopener">
-            Registration</a></li>
-        <li><a href="/postvideo" rel ="noreferrer noopener">
-            Post Video</a></li>
-        <li><a href="/profile" rel ="noreferrer noopener">
-            Profile</a></li>
-        <li><a href="/viewpost/1234" rel ="noreferrer noopener">
-            View Post</a></li>
+        {{/if}}
+        <li><a href="/registration" rel="noreferrer noopener">
+                Registration</a></li>
+        <li><a href="/postvideo" rel="noreferrer noopener">
+                Post Video</a></li>
+        <li><a href="/users/profile/30" rel="noreferrer noopener">
+                Profile</a></li>
+        <li><a href="/viewpost/1234" rel="noreferrer noopener">
+                View Post</a></li>
     </ul>
 </nav>

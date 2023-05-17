@@ -20,10 +20,6 @@ router.get("/postvideo", function(req,res){
   res.render('postvideo', { title: 'Post Video'});
 })
 
-router.get("/profile", function(req,res){
-  res.render('profile' , { title: 'User Profile'});
-})  
-
 //Make Title the name of the video  
 router.get("/viewpost/:id(\\d+)", function(req,res){
   res.render('viewpost' , { title: 'View Post'});

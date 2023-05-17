@@ -61,8 +61,14 @@ router.post('/login', async function(req, res, next){
         return res.redirect('/login');
       }else{
         var passwordsMatch = await bcrypt.compare(password, user.password)
-        if(passwordsMatch)
+        if(passwordsMatch){
+          req.session.user={
+            userId: user.id,
+            email: user.email,
+            username: user.username
+          };
           return res.redirect('/');
+        }
         else
           return res.redirect('/login');
       }
@@ -72,8 +78,27 @@ router.post('/login', async function(req, res, next){
   }
 });
 
-router.post('/logout', function(req,res,end){
+// Guard Clause/Route Protector Middleware function
+router.use(function(req,res,next){
+  if(req.session.user){
+    next();
+  }else{
+    return res.redirect('/login');
+  }
+});
 
+router.get("/profile/:id(\\d+)", function(req,res){
+  res.render('profile' , { title: 'User Profile'});
+})  
+
+// Logout
+router.post('/logout', function(req,res,end){
+  req.session.destroy(function(err){
+    if(err){
+      next(err);
+    }
+    return res.redirect('/');
+  });
 });
 
 module.exports = router;
