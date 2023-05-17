@@ -11,11 +11,11 @@
   
   
     <body>
+        {{> header}}
+        {{> navbar}}
         {{#if (nonEmptyObject messages)}}
             {{> flashmessage this}}
         {{/if}}
-        {{> header}}
-        {{> navbar}}
         {{{body}}}
     </body>
 

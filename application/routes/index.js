@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var{isLoggedIn, isMyProfile} = require('../middleware/auth');
 
 /* GET home page. */
 //localhost:3000
@@ -16,7 +17,7 @@ router.get("/registration", function(req,res){
   res.render('registration', { title: "Registration Form"});
 })
 
-router.get("/postvideo", function(req,res){
+router.get("/postvideo", isLoggedIn, function(req,res){
   res.render('postvideo', { title: 'Post Video'});
 })
 

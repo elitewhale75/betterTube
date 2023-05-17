@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../conf/database');
 var bcrypt = require('bcrypt');
+var{isLoggedIn, isMyProfile} = require('../middleware/auth');
 
 //Register Form Route Handler
 router.post('/registration', async function(req, res, next) {
@@ -87,16 +88,7 @@ router.post('/login', async function(req, res, next){
   }
 });
 
-// Guard Clause/Route Protector Middleware function
-router.use(function(req,res,next){
-  if(req.session.user){
-    next();
-  }else{
-    return res.redirect('/login');
-  }
-});
-
-router.get("/profile/:id(\\d+)", function(req,res){
+router.get("/profile/:id(\\d+)", isLoggedIn, isMyProfile, function(req,res){
   res.render('profile' , { title: 'User Profile'});
 })  
 
