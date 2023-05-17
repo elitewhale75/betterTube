@@ -3,23 +3,19 @@ var router = express.Router();
 var db = require('../conf/database');
 var bcrypt = require('bcrypt');
 var{isLoggedIn, isMyProfile} = require('../middleware/auth');
+const { usernameCheck, isUsernameUnique, isEmailUnique } = require('../middleware/validation');
 
-//Register Form Route Handler
-router.post('/registration', async function(req, res, next) {
 
-  //Username Check
+//Register Form Route Handler Insert into DB
+router.post(
+'/registration', 
+usernameCheck, 
+isUsernameUnique, 
+isEmailUnique, 
+async function(req, res, next) {
+
   var {username,email,password} = req.body;
   try{
-    var [rows, fields] = await db.execute(`select id from users where username =?;`, [username]);
-    if(rows && rows.length > 0){
-      return res.redirect('/registration');
-    }
-
-    //Email Check These two would be better as middleware functions
-    var [rows, fields] = await db.execute(`select id from users where email =?;`, [email]);
-    if(rows && rows.length > 0){
-      return res.redirect('/registration');
-    }
 
     var hashedPassword = await bcrypt.hash(password,3);
 
