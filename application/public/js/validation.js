@@ -107,6 +107,9 @@ document.getElementById('confirmPassword').addEventListener('input', function(ev
 // Submit Form
 document.getElementById('reg-form').addEventListener('submit', function (ev){
     ev.preventDefault();
+
+    console.log(confirmPassword);
+    
     //Determine if form is good or bad on time of submit
     if(validateUsername() == "valid" &&
         validatePassword() == "valid" &&
