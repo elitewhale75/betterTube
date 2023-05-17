@@ -11,6 +11,9 @@
   
   
     <body>
+        {{#if (nonEmptyObject messages)}}
+            {{> flashmessage this}}
+        {{/if}}
         {{> header}}
         {{> navbar}}
         {{{body}}}

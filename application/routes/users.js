@@ -58,7 +58,11 @@ router.post('/login', async function(req, res, next){
       
       var user = rows[0];
       if(!user){
-        return res.redirect('/login');
+        req.flash("error", `Log in Failed: Invalid username/password`);
+        req.session.save(function(error){
+          return res.redirect('/login');
+        });
+        
       }else{
         var passwordsMatch = await bcrypt.compare(password, user.password)
         if(passwordsMatch){
@@ -67,10 +71,15 @@ router.post('/login', async function(req, res, next){
             email: user.email,
             username: user.username
           };
-          return res.redirect('/');
+          req.flash("success",`You are now logged in`);
+          req.session.save(function(error){
+            return res.redirect('/');
+          });
         }
-        else
+        else{
           return res.redirect('/login');
+        }
+          
       }
     } catch (error) {
       next(error);
