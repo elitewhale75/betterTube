@@ -28,7 +28,7 @@ function validatePassword(){ //Validates Password
 }
 
 function confirmPassword(){ //Validates Confirm Password
-    let confirmPass = document.getElementById('confirm-password').value;
+    let confirmPass = document.getElementById('confirmPassword').value;
     let password = document.getElementById('password').value;
 
     if(confirmPass.length == 0){
@@ -62,7 +62,7 @@ document.getElementById('username').addEventListener('input', function(ev){
 // Change color of Password Box (and situationally confirm password)
 document.getElementById('password').addEventListener('input', function(ev){
     let userInput = ev.currentTarget;
-    let confirmPass = document.getElementById('confirm-password');
+    let confirmPass = document.getElementById('confirmPassword');
 
     if(validatePassword() == "valid"){
         userInput.setAttribute("class", `${userInput.getAttribute('class')}
@@ -86,7 +86,7 @@ document.getElementById('password').addEventListener('input', function(ev){
 });
 
 // Change Color of Confirm Password Box
-document.getElementById('confirm-password').addEventListener('input', function(ev){
+document.getElementById('confirmPassword').addEventListener('input', function(ev){
     let userInput = ev.currentTarget;
     
     if(confirmPassword() == "valid"){

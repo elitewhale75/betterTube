@@ -11,8 +11,9 @@ router.get("/login", function(req,res){
   res.render('login', { title: 'Login'});
 })
 
+//, script: 'public/js/validation.js'
 router.get("/registration", function(req,res){
-  res.render('registration', { title: "Registration Form", script: 'public/js/validation.js'});
+  res.render('registration', { title: "Registration Form"});
 })
 
 router.get("/postvideo", function(req,res){

@@ -8,7 +8,10 @@
     <main>
         <h2>Registration</h2>
 
-        <form id = "reg-form">
+        <form id = "reg-form"
+        action="/users/registration"
+        method = "post"
+        enctype="application/x-www-form-urlencoded">
             <div class="input-group">
                 <label for="username">Username</label>
                 <input 
@@ -26,7 +29,7 @@
                 id="email"
                 placeholder="Email" 
                 class="input-text"
-                required>
+                >
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
@@ -38,24 +41,24 @@
                 class="input-text">
             </div>
             <div class="input-group">
-                <label for="confirm-password">Confirm Password</label>
+                <label for="confirmPassword">Confirm Password</label>
                 <input 
                 type="password"
-                name="confirm-password" 
-                id="confirm-password"
+                name="confirmPassword" 
+                id="confirmPassword"
                 placeholder="Confirm password" 
                 class="input-text"> 
             </div>
 
             <div class="checkbox-group">
                 <label for="age_req">Confirm that you are at least 13 years of age</label>
-                <input type="checkbox" name="age_req" id="age_req" required>
+                <input type="checkbox" name="age_req" id="age_req" >
             </div>
 
             <div class="checkbox-group">
                 <label for="tos"> <a href="nowhere.html" rel ="noreferrer noopener" target="_blank">
                     Accept Terms of Service and Privacy Rules</a></label>
-                <input type="checkbox" name="tos" id="tos" required>
+                <input type="checkbox" name="tos" id="tos" >
             </div>
 
             <input 
