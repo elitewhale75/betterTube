@@ -1,27 +1,57 @@
 <body>
     <main>
-        <video width="720" height = "480" 
-        src= "/{{currentPost.video}}" 
-        controls type="video/webm"></video>
-        
+        <video width="720" height="480" src="/{{currentPost.video}}" controls type="video/webm"></video>
+
         <article id="post">
             <h2 id="post_title">{{currentPost.title}}</h2>
             <section id="post_details">
                 <p id="author">Author: {{currentPost.username}}</p>
-                <p id="creation_time">Creation Time: {{currentPost.datePosted}}</p>
+                <p id="creation_time">Creation Time: {{formatDateString currentPost.datePosted}}</p>
                 <div id="video"></div>
             </section>
         </article>
-        {{log this}}
-        <article>
-            <input type="text" class="comment-field">
-            <section>
+        <article class="comment-group">
+            <textarea id="comment-field" class="comment-field"></textarea>
+            <button 
+            type="submit" 
+            class="submit-comment" 
+            id="submit-comment"
+            data-postid="{{currentPost.id}}"
+            >Submit</button>
+
+            <section class="comment-section">
                 {{#each currentPost.comments}}
-                    {{> comment}}
+                {{> comment}}
                 {{/each}}
             </section>
+
+            <script>
+                document.getElementById('submit-comment').addEventListener('click', function(ev){
+                    let commentText = document.getElementById("comment-field").value;
+
+                    if(!commentText) return;
+                    var postId = ev.currentTarget.dataset.postid;
+
+                    fetch("/comments/create/",
+                    {
+                        method: "POST",
+                        headers: 
+                        {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(
+                        {
+                            postId: postId,
+                            comment: commentText
+                        })
+                    }).then(response => response.json())
+                      .then(data => console.log(data)) 
+                });
+
+            </script>
         </article>
 
     </main>
 </body>
+
 </html>

@@ -50,8 +50,8 @@ router.post("/create",
     });
 
 //Make Title the name of the video  
-router.get("/viewpost/:id(\\d+)", getPostForUserById, getCommentsForPostByID, async function (req, res,next) {
-    res.render('viewpost');
+router.get("/viewpost/:id(\\d+)", getPostForUserById, getCommentsForPostByID, async function (req, res, next) {
+    res.render('viewpost', {title: `${res.locals.currentPost.title}`});
 })
 
 router.get("/search", async function (req, res, next) {

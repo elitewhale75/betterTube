@@ -24,7 +24,6 @@ module.exports = {
 
     getPostForUserById: async function (req, res, next) {
         var { id } = req.params;
-        console.log("finding by id")
         try {
             //Find Post and Username in DB
             var [rows, _] = await db.execute(
@@ -40,7 +39,6 @@ module.exports = {
         }
 
         const post = rows[0];
-        console.log(post);
 
         if (!post) {
             req.flash("error", "Post does not exist");
@@ -53,7 +51,7 @@ module.exports = {
         }
     },
 
-    getPostByID: async function (req, res, next) {
+    getPostById: async function (req, res, next) {
 
     },
 
