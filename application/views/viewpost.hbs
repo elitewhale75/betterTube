@@ -1,41 +1,24 @@
 <body>
     <main>
         <video width="720" height = "480" 
-        src= "{{videoSource}}" 
+        src= "/{{currentPost.video}}" 
         controls type="video/webm"></video>
         
         <article id="post">
-            <h2 id="post_title">{{postTitle}}</h2>
+            <h2 id="post_title">{{currentPost.title}}</h2>
             <section id="post_details">
-                <p id="author">Author: {{author}}</p>
-                <p id="creation_time">Creation Time: {{dateCreated}}</p>
+                <p id="author">Author: {{currentPost.username}}</p>
+                <p id="creation_time">Creation Time: {{currentPost.datePosted}}</p>
                 <div id="video"></div>
             </section>
         </article>
-
+        {{log this}}
         <article>
             <input type="text" class="comment-field">
             <section>
-                <ul>
-                    <li>
-                        <div>
-                            <p></p>
-                            <p></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <p></p>
-                            <p></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <p></p>
-                            <p></p>
-                        </div>
-                    </li>
-                </ul>
+                {{#each currentPost.comments}}
+                    {{> comment}}
+                {{/each}}
             </section>
         </article>
 

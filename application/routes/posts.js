@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
-const { makeThumbnail, usePolicyCheck } = require('../middleware/posts');
+const { makeThumbnail, usePolicyCheck, getPostByID, getCommentsForPostByID, getPostForUserById } = require('../middleware/posts');
 var db = require('../conf/database');
 const { isLoggedIn, isMyProfile } = require('../middleware/auth');
 
@@ -50,48 +50,8 @@ router.post("/create",
     });
 
 //Make Title the name of the video  
-router.get("/viewpost/:id(\\d+)", async function (req, res,next) {
-    //Extract Post Id
-    var { id } = req.params;
-
-    try {
-        //Find Post in DB
-        var [rows, _] = await db.execute(
-            `select * from posts where id=?;`,
-            [id]);
-
-    } catch (error) {
-        next(error);
-    }
-
-    
-    //render post
-    if (rows && rows.length == 0) {
-        req.flash("error", "Post does not exist");
-        return req.session.save(function (error) {
-            return res.redirect(`/`);
-        });
-    } else {
-
-        try {
-            //Find Author of Post
-            var [author, _] = await db.execute(
-                `SELECT * FROM csc317db.users where id=?`,
-                [rows[0].fk_userId]);
-    
-        } catch (error) {
-            next(error);
-        }
-
-        console.log(rows);
-        res.render('viewpost', {     
-            title: `${rows[0].title}`,
-            postTitle: `${rows[0].title}`,
-            videoSource: `/${rows[0].video.split('viewpost/')[0]}`,
-            author: `${author[0].username}`,
-            dateCreated: `${rows[0].datePosted}`
-        });
-    }
+router.get("/viewpost/:id(\\d+)", getPostForUserById, getCommentsForPostByID, async function (req, res,next) {
+    res.render('viewpost');
 })
 
 router.get("/search", async function (req, res, next) {
