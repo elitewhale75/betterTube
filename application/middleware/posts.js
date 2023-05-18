@@ -11,7 +11,7 @@ module.exports = {
                     req.file.filename.split(".")[0]}.png`
                     console.log(pathToFFMPEG);
                 var thumbnailCommand = `${pathToFFMPEG} -i ${req.
-                    file.path} -ss 00:00:01 -vframes 1 ${destinationOfThumbnail}`;
+                    file.path} -ss 00:00:01 -y -s 640x360 -vframes 1 ${destinationOfThumbnail}`;
                 exec(thumbnailCommand);
                 req.file.thumbnail = destinationOfThumbnail;
                 next();
@@ -35,6 +35,6 @@ module.exports = {
     },
     
     getRecentPosts: function(req,res,next){
-
+        
     }
 }

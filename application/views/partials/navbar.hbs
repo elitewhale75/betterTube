@@ -2,6 +2,8 @@
 
 <nav>
     <ul>
+
+
         <li><a href="/" rel="noreferrer noopener">
                 Home</a></li>
 
@@ -13,11 +15,23 @@
         {{/if}}
         <li><a href="/registration" rel="noreferrer noopener">
                 Registration</a></li>
+        <li class = "search-tab">
+                <form class = "search-form" action="/posts/search"
+                method="GET"
+                enctype="application/x-www-form-urlencoded">
+                        <input 
+                        type="text" 
+                        name="searchValue" 
+                        class="search-field"
+                        placeholder="Search Video">
+                        
+                        <button class="search-submit">Search</button>
+                </form>
+                
+        </li>
         <li><a href="/postvideo" rel="noreferrer noopener">
                 Post Video</a></li>
         <li><a href="/users/profile/30" rel="noreferrer noopener">
                 Profile</a></li>
-        <li><a href="/viewpost/1234" rel="noreferrer noopener">
-                View Post</a></li>
     </ul>
 </nav>

@@ -56,6 +56,25 @@ nav > ul > li > a {
   width: 100%;
 }
 
+/*Search Form*/
+.search-form{
+  display: flex;
+  flex-direction: row;
+  gap:0px;
+}
+
+/*Search Bar*/
+.search-field{
+  font-weight: 600;
+}
+
+/*Search Bar Button*/
+.search-submit{
+  background:rgb(0, 118, 228);
+  border:none;
+  border-radius: 0.25rem;
+}
+
 /*Mouse over Anchor tags*/
 nav > ul > li > a:hover {
   margin:0;
@@ -165,8 +184,8 @@ button:active{
 
 /*Grouping of Images*/
 .img-group{
-    width: 140px;
-    height: 125px;
+    width: 160px;
+    height: 90px;
     border: 2px solid black;
     padding-bottom: 75px;
     padding-top: 10px;

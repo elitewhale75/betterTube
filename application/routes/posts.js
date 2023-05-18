@@ -28,7 +28,6 @@ async function (req, res, next) {
     var{post_title, post_description} = req.body;
     var{path, thumbnail} = req.file;
     var {userId} = req.session.user;
-    console.log(req.body);
 
     try{
         var [insertResult, _] = await db.execute(
@@ -55,8 +54,25 @@ router.get("/viewpost/:id(\\d+)", function(req,res){
     res.render('viewpost' , { title: 'View Post'});
 })
 
-router.get("/search", function(req,res,next){
+router.get("/search", async function(req,res,next){
+    var{searchValue} = req.query;
 
+    try {
+        var [rows, _] = await db.execute(
+        `select id,title,thumbnail, concat_ws(' ', title, description) 
+        as haystack from posts having haystack like ?;`,
+        [`%${searchValue}%`]
+        );
+
+        if(rows && rows.length == 0){
+            //Still try to return something
+        }else{
+            res.locals.posts = rows;
+            res.render('index')
+        }
+    } catch (error) {
+        next(error);
+    }
 });
 
 router.delete("/delete", function(req,res,next){
