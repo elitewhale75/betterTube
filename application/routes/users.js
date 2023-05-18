@@ -3,20 +3,27 @@ var router = express.Router();
 var db = require('../conf/database');
 var bcrypt = require('bcrypt');
 var{isLoggedIn, isMyProfile} = require('../middleware/auth');
-const { usernameCheck, isUsernameUnique, isEmailUnique } = require('../middleware/validation');
+const { usernameCheck, isUsernameUnique, isEmailUnique, passwordCheck, emailCheck, isPasswordConfirmed, ageCheck, tosCheck} = require('../middleware/validation');
 
 
 //Register Form Route Handler Insert into DB
 router.post(
-'/registration', 
+'/registration',
 usernameCheck, 
-isUsernameUnique, 
-isEmailUnique, 
+passwordCheck,
+isPasswordConfirmed,
+ageCheck,
+tosCheck,
+emailCheck,
+isUsernameUnique,
+isEmailUnique,
 async function(req, res, next) {
+
+  console.log(req.body);
 
   var {username,email,password} = req.body;
   try{
-
+    //Encrypy Password
     var hashedPassword = await bcrypt.hash(password,3);
 
   }catch(error){

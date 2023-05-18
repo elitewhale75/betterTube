@@ -7,7 +7,10 @@
     <main>
         <h2>Post Video</h2>
 
-        <form>
+        <form
+        action="/posts/create"
+        method ="post"
+        enctype="multipart/form-data">
             <div class="input-group">
                 <label for="post_title">Input Post Title</label>
                 <input 
@@ -29,11 +32,11 @@
                 
             </div>
             <div>
-                <label for="post_video">Input Video File</label>
+                <label for="post-video">Input Video File</label>
                 <input 
                 type="file" 
-                name="post_video" 
-                id="post_video">
+                name="post-video" 
+                id="post-video">
             </div>
             <div class="checkbox-group">
                 <label for="accept_use_policy">Please accept use policy for uploading videos</label>

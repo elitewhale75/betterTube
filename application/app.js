@@ -13,6 +13,8 @@ const flash = require('express-flash');
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const postRouter = require("./routes/posts");
+const commentsRouter = require("./routes/comments");
 
 const app = express();
 
@@ -69,6 +71,9 @@ app.use(function(req, res, next){
 
 app.use("/", indexRouter); // route middleware from ./routes/index.js
 app.use("/users", usersRouter); // route middleware from ./routes/users.js
+app.use("/posts", postRouter);
+app.use("/comments", commentsRouter);
+
 
 
 /**
