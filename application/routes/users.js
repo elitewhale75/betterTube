@@ -20,8 +20,9 @@ isEmailUnique,
 async function(req, res, next) {
 
   var {username,email,password} = req.body;
+  
   try{
-    //Encrypy Password
+    //Encrypt Password
     var hashedPassword = await bcrypt.hash(password,3);
 
   }catch(error){
@@ -35,10 +36,12 @@ async function(req, res, next) {
     (?,?,?);`, 
     [username, email, hashedPassword]);
 
-  //Respond
-  if(resultObject && resultObject.affectedRows == 1){
-    //Redirect to a page after a successful registration
-    return res.redirect('/login'); 
+    if(resultObject && resultObject.affectedRows == 1){
+      req.flash("success", `Registration has succeeded!`);
+      req.session.save(function(error){
+        return res.redirect('/login');
+    });
+    
   }else{
     return res.redirect('/registration');
   }

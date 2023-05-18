@@ -12,9 +12,9 @@ router.get("/login", function(req,res){
   res.render('login', { title: 'Login'});
 })
 
-// , script: 'public/js/validation.js'
+// 
 router.get("/registration", function(req,res){
-  res.render('registration', { title: "Registration Form"});
+  res.render('registration', { title: "Registration Form" , script: 'public/js/validation.js'});
 })
 
 router.get("/postvideo", isLoggedIn, function(req,res){

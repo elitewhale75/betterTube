@@ -3,7 +3,7 @@ var router = express.Router();
 var multer = require('multer');
 const { makeThumbnail, usePolicyCheck } = require('../middleware/posts');
 var db = require('../conf/database');
-const {isLoggedIn, isMyProfile} = require('../middleware/auth');
+const { isLoggedIn, isMyProfile } = require('../middleware/auth');
 
 //Taken from FFMPEG for disk storage video 
 const storage = multer.diskStorage({
@@ -20,62 +20,102 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 //Route Handler for post video
-router.post("/create", 
-isLoggedIn,
-upload.single("post-video"), 
-makeThumbnail, 
-async function (req, res, next) {
-    var{post_title, post_description} = req.body;
-    var{path, thumbnail} = req.file;
-    var {userId} = req.session.user;
+router.post("/create",
+    isLoggedIn,
+    upload.single("post-video"),
+    makeThumbnail,
+    async function (req, res, next) {
+        var { post_title, post_description } = req.body;
+        var { path, thumbnail } = req.file;
+        var { userId } = req.session.user;
 
-    try{
-        var [insertResult, _] = await db.execute(
-            `INSERT INTO posts(title, description, video, thumbnail, fk_userId)
-            VALUE (?,?,?,?,?);`, 
-            [post_title, post_description, path, thumbnail, userId]
-        );
-        if(insertResult && insertResult.affectedRows == 1){
-            req.flash("success", "Your post was created!");
-            return req.session.save(function (error){
-                return res.redirect(`/`); //change to post soon
-            })
-        }else{
-            next(new Error('Post could not be created'));
+        try {
+            var [insertResult, _] = await db.execute(
+                `INSERT INTO posts(title, description, video, thumbnail, fk_userId)
+            VALUE (?,?,?,?,?);`,
+                [post_title, post_description, path, thumbnail, userId]
+            );
+            if (insertResult && insertResult.affectedRows == 1) {
+                req.flash("success", "Your post was created!");
+                return req.session.save(function (error) {
+                    return res.redirect(`/`); //change to post soon
+                })
+            } else {
+                next(new Error('Post could not be created'));
+            }
+        } catch (error) {
+            next(error);
         }
-    }catch(error){
-        next(error);
-    }
-    res.end();
-});
+        res.end();
+    });
 
 //Make Title the name of the video  
-router.get("/viewpost/:id(\\d+)", function(req,res){
-    res.render('viewpost' , { title: 'View Post'});
+router.get("/viewpost/:id(\\d+)", async function (req, res,next) {
+    //Extract Post Id
+    var { id } = req.params;
+
+    try {
+        //Find Post in DB
+        var [rows, _] = await db.execute(
+            `select * from posts where id=?;`,
+            [id]);
+
+    } catch (error) {
+        next(error);
+    }
+
+    
+    //render post
+    if (rows && rows.length == 0) {
+        req.flash("error", "Post does not exist");
+        return req.session.save(function (error) {
+            return res.redirect(`/`);
+        });
+    } else {
+
+        try {
+            //Find Author of Post
+            var [author, _] = await db.execute(
+                `SELECT * FROM csc317db.users where id=?`,
+                [rows[0].fk_userId]);
+    
+        } catch (error) {
+            next(error);
+        }
+
+        console.log(rows);
+        res.render('viewpost', {     
+            title: `${rows[0].title}`,
+            postTitle: `${rows[0].title}`,
+            videoSource: `/${rows[0].video.split('viewpost/')[0]}`,
+            author: `${author[0].username}`,
+            dateCreated: `${rows[0].datePosted}`
+        });
+    }
 })
 
-router.get("/search", async function(req,res,next){
-    var{searchValue} = req.query;
+router.get("/search", async function (req, res, next) {
+    var { searchValue } = req.query;
 
     try {
         var [rows, _] = await db.execute(
-        `select id,title,thumbnail, concat_ws(' ', title, description) 
+            `select id,title,thumbnail, concat_ws(' ', title, description) 
         as haystack from posts having haystack like ?;`,
-        [`%${searchValue}%`]
+            [`%${searchValue}%`]
         );
 
-        if(rows && rows.length == 0){
+        if (rows && rows.length == 0) {
             //Still try to return something
-        }else{
+        } else {
             res.locals.posts = rows;
-            res.render('index')
+            res.render('index');
         }
     } catch (error) {
         next(error);
     }
 });
 
-router.delete("/delete", function(req,res,next){
+router.delete("/delete", function (req, res, next) {
 
 });
 
