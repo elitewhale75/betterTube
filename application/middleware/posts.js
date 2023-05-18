@@ -20,5 +20,21 @@ module.exports = {
             }
 
         }
+    },
+
+    getPostForUserById: function(req,res,next){
+
+    },
+
+    getPostByID: function(req,res,next){
+
+    },
+
+    getCommentsForPostByID: function(req,res,next){
+
+    },
+    
+    getRecentPosts: function(req,res,next){
+
     }
 }

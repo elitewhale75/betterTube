@@ -21,9 +21,4 @@ router.get("/postvideo", isLoggedIn, function(req,res){
   res.render('postvideo', { title: 'Post Video'});
 })
 
-//Make Title the name of the video  
-router.get("/viewpost/:id(\\d+)", function(req,res){
-  res.render('viewpost' , { title: 'View Post'});
-})
-
 module.exports = router;

@@ -19,8 +19,6 @@ isUsernameUnique,
 isEmailUnique,
 async function(req, res, next) {
 
-  console.log(req.body);
-
   var {username,email,password} = req.body;
   try{
     //Encrypy Password
