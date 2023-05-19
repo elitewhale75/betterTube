@@ -11,41 +11,60 @@
             </section>
         </article>
         <article class="comment-group">
-            <textarea id="comment-field" class="comment-field"></textarea>
-            <button 
-            type="submit" 
-            class="submit-comment" 
-            id="submit-comment"
-            data-postid="{{currentPost.id}}"
-            >Submit</button>
+            <textarea id="comment-field" class="comment-field" autocomplete="off"></textarea>
+            <button type="submit" class="submit-comment" id="submit-comment"
+                data-postid="{{currentPost.id}}">Submit</button>
 
-            <section class="comment-section">
+            <section id = "comment-section" class="comment-section">
                 {{#each currentPost.comments}}
                 {{> comment}}
                 {{/each}}
             </section>
 
             <script>
-                document.getElementById('submit-comment').addEventListener('click', function(ev){
-                    let commentText = document.getElementById("comment-field").value;
+                //Clear text area
 
-                    if(!commentText) return;
+                document.getElementById('submit-comment').addEventListener('click', function (ev) {
+                    var commentText = document.getElementById("comment-field").value;
+
+                    if (!commentText) return;
                     var postId = ev.currentTarget.dataset.postid;
 
+                    //Fetch fields from frontend and send to server as JSON
                     fetch("/comments/create/",
-                    {
-                        method: "POST",
-                        headers: 
                         {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(
-                        {
-                            postId: postId,
-                            comment: commentText
-                        })
-                    }).then(response => response.json())
-                      .then(data => console.log(data)) 
+                            method: "POST",
+                            headers:
+                            {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(
+                                {
+                                    postId: postId,
+                                    comment: commentText
+                                })
+                        }).then(response => response.json())
+                        .then(data => { // Update comments to frontend
+                            console.log(data);
+                            var comments = document.getElementById('comment-section');
+                            let commentFragment = document.createElement('template');
+                            commentFragment.innerHTML = 
+                            `<div class = "comment" id="comment">
+                                <strong class = "comment-author">${data.username}</strong>
+                                <span class="commennt-date">${(new Date()).toLocaleString(
+                                    "en-us", {
+                                        dateStyle: "long",
+                                        timeStyle: "medium"
+                                    }
+                                    )}</span>
+                                <div class = "comment-text">${data.comment}</div>
+                            </div>`;
+                            comments.append(commentFragment.content.firstChild);
+                            
+
+                        }).catch(err => console.log(err));
+
+                        
                 });
 
             </script>
