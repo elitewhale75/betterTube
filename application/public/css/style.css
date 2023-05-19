@@ -46,7 +46,7 @@ nav > ul > li{
 }
 
 /*Anchor Tags*/
-nav > ul > li > a {
+nav > ul > li a, p {
   
   text-decoration: none;
   color:whitesmoke;
@@ -54,6 +54,7 @@ nav > ul > li > a {
   padding-top: 6px;
   height:100%;
   width: 80%;
+  margin:0;
 }
 
 /*Search Form*/
@@ -77,12 +78,35 @@ nav > ul > li > a {
 
 }
 
-/*Mouse over Anchor tags*/
-nav > ul > li > a:hover {
+/*Mouse over Anchor tags and Dropdown*/
+nav > ul > li a:hover, li p:hover {
+  cursor:pointer;
   margin:0;
   background-color: rgb(18,17,124);
   border-radius: var(--text-rounded-corners);
 }
+
+/*Dropdown*/
+.dropdown{
+  background-color: var(--site-theme);
+  border-radius: var(--text-rounded-corners);
+  padding-left: 0px;
+  padding: 10px;
+  margin:0px;
+  display: none;
+  flex-direction: column;
+  position: absolute !important;
+
+}
+
+.dropdown > p {
+  text-align: left;
+  display: inline-block;
+  width: 100%;
+}
+
+/*Show Dropdown*/
+.show{display:flex}
 
 body {
   font: 0.875rem "Lucida Grande", Helvetica, Arial, sans-serif;

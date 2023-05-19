@@ -9,7 +9,6 @@ module.exports = {
         } else {
             try {
                 var destinationOfThumbnail = `public/images/uploads/thumbnail-${req.file.filename.split(".")[0]}.png`
-                console.log(pathToFFMPEG);
                 var thumbnailCommand = `${pathToFFMPEG} -i ${req.
                     file.path} -ss 00:00:01 -y -s 640x360 -vframes 1 ${destinationOfThumbnail}`;
                 exec(thumbnailCommand);
@@ -76,7 +75,15 @@ module.exports = {
         next();
     },
 
-    getRecentPosts: function (req, res, next) {
-
+    getRecentPosts: async function (req, res, next) {
+        try {
+            var[rows, _] = await db.execute(
+                `select * from posts order by datePosted desc limit 2;`
+            )
+            res.locals.posts = rows;
+            next();
+        } catch (error) {
+            next();
+        }
     }
 }

@@ -2,17 +2,9 @@
 
 <nav>
     <ul>
-
-
         <li><a href="/" rel="noreferrer noopener">
                 Home</a></li>
 
-        {{#if isLoggedIn}}
-            
-        {{else}}
-        <li><a href="/login" rel="noreferrer noopener">
-            Login</a></li>
-        {{/if}}
         <li><a href="/registration" rel="noreferrer noopener">
                 Registration</a></li>
         <li class = "search-tab">
@@ -26,12 +18,21 @@
                         placeholder="Search Video">
                         
                         <button class="search-submit">Search</button>
-                </form>
-                
+                </form>         
         </li>
         <li><a href="/postvideo" rel="noreferrer noopener">
                 Post Video</a></li>
-        <li><a href="/users/profile/30" rel="noreferrer noopener">
-                Profile</a></li>
+        {{#if isLoggedIn}}
+        <li id="user-context-tab">
+                <p id="greeting">Hello {{user.username}}</p>
+                <div id = "dropdown" class="dropdown">
+                        <a id="link-to-user" href="/users/profile/{{user.userId}}">Profile</a>
+                        <p id="logout">Logout</p>
+                </div>
+            </li>
+        {{else}}
+        <li><a href="/login" rel="noreferrer noopener">
+            Login</a></li>
+        {{/if}}
     </ul>
 </nav>

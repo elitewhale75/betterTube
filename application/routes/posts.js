@@ -25,6 +25,7 @@ router.post("/create",
     upload.single("post-video"),
     makeThumbnail,
     async function (req, res, next) {
+        
         var { post_title, post_description } = req.body;
         var { path, thumbnail } = req.file;
         var { userId } = req.session.user;
@@ -36,9 +37,10 @@ router.post("/create",
                 [post_title, post_description, path, thumbnail, userId]
             );
             if (insertResult && insertResult.affectedRows == 1) {
+                var {insertId} = insertResult
                 req.flash("success", "Your post was created!");
                 return req.session.save(function (error) {
-                    return res.redirect(`/`); //change to post soon
+                    return res.redirect(`/posts/viewpost/${insertId}`);
                 })
             } else {
                 next(new Error('Post could not be created'));

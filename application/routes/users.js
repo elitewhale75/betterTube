@@ -78,6 +78,7 @@ router.post('/login', async function(req, res, next){
           };
           req.flash("success",`You are now logged in`);
           req.session.save(function(error){
+            res.locals.session = req.session;
             return res.redirect('/');
           });
         }
