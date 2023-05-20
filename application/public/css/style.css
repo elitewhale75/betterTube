@@ -273,17 +273,25 @@ button:active{
   font-size: 100%;
   font-weight: 600;
   color:whitesmoke;
-  display:flex;
-  flex-flow: column;
-  justify-items: center;
+  display:inline-block;
   width: 161.33px;
-  gap: 25px
+  height:40%;
+  gap: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .delete-button{
   background-color: red;
   font-weight: 600;
   padding:3px;
+  width: 100%;
+  box-shadow:  -2px 2px 5px black;
+}
+
+.delete-button:hover{
+  background-color: red;
 }
 
 .delete-button:active{
