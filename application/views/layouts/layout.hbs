@@ -6,7 +6,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/public/css/style.css">
-        <script name="navbar script" defer src="public/js/navbar.js"></script>
+        {{#if isLoggedIn}}
+            <script name="navbar script" defer src="/public/js/navbar.js"></script>
+        {{/if}}
+        
         <script name="page specific script" defer src="{{script}}"></script>
 
     </head>

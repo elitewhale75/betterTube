@@ -1,5 +1,5 @@
 :root {
-  --site-bg: rgb(248, 170, 26);
+  --site-bg: rgb(188, 188, 188);
   --text-rounded-corners: 1rem;
   --site-theme: rgb(18,17,64);
 }
@@ -208,7 +208,7 @@ button:active{
   
 }
 
-/*Grouping of Images*/
+/*Grouping of Videos*/
 .img-group{
     width: 160px;
     height: 90px;
@@ -220,14 +220,14 @@ button:active{
     background-color: rgb(18,17,130);
 }
 
-/*Fixing Image Size within img group*/
+/*Fixing thumbnails Size within img group*/
 .img{
   width:100%;
   height:100%;
   border: 1px solid black;
 }
 
-/*Styling for Image Text*/
+/*Styling for video Text*/
 .img-title{
   margin: 8px;
   padding:0px;

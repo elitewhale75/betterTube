@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../conf/database');
 var bcrypt = require('bcrypt');
+var{getPostForUserById, getPostByUserId} = require("../middleware/posts");
 var{isLoggedIn, isMyProfile} = require('../middleware/auth');
 const { usernameCheck, isUsernameUnique, isEmailUnique, passwordCheck, emailCheck, isPasswordConfirmed, ageCheck, tosCheck} = require('../middleware/validation');
 
@@ -93,18 +94,18 @@ router.post('/login', async function(req, res, next){
   }
 });
 
-router.get("/profile/:id(\\d+)", isLoggedIn, isMyProfile, function(req,res){
+router.get("/profile/:id(\\d+)", isLoggedIn, isMyProfile, getPostByUserId, function(req,res){
   res.render('profile' , { title: 'User Profile'});
 })  
 
 // Logout
-router.post('/logout', function(req,res,end){
+router.post('/logout', isLoggedIn, function(req,res,end){
   req.session.destroy(function(err){
     if(err){
       next(err);
     }
-    return res.redirect('/');
   });
+  return res.redirect('/');
 });
 
 module.exports = router;

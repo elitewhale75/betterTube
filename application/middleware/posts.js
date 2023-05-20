@@ -10,7 +10,7 @@ module.exports = {
             try {
                 var destinationOfThumbnail = `public/images/uploads/thumbnail-${req.file.filename.split(".")[0]}.png`
                 var thumbnailCommand = `${pathToFFMPEG} -i ${req.
-                    file.path} -ss 00:00:01 -y -s 640x360 -vframes 1 ${destinationOfThumbnail}`;
+                    file.path} -ss 00:00:03 -y -s 640x360 -vframes 1 ${destinationOfThumbnail}`;
                 exec(thumbnailCommand);
                 req.file.thumbnail = destinationOfThumbnail;
                 next();
@@ -50,10 +50,19 @@ module.exports = {
         }
     },
 
-    getPostById: async function (req, res, next) {
-
+    getPostByUserId: async function (req, res, next) {
+        var {userId} = req.session.user;
+        try {
+            var[rows, _] = await db.execute(
+                `select * from posts where fk_userId=?`,
+                [userId]
+            )
+            res.locals.posts = rows;
+            next();
+        }catch(err){
+            next(err);
+        }
     },
-
     getCommentsForPostByID: async function (req, res, next) {
         var { id } = req.params;
 

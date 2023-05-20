@@ -24,10 +24,12 @@
             <script>
                 //Clear text area
 
+                //Comment submit
                 document.getElementById('submit-comment').addEventListener('click', function (ev) {
                     var commentText = document.getElementById("comment-field").value;
 
                     if (!commentText) return;
+                    //Custom attribute retrieval, can see the post comment section belongs too
                     var postId = ev.currentTarget.dataset.postid;
 
                     //Fetch fields from frontend and send to server as JSON
