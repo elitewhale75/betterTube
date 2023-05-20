@@ -25,6 +25,9 @@ document.getElementById("logout").
 addEventListener("click", function(event){
     fetch("/users/logout", {method: "POST"})
     .then(data => { //Get link from routehandler
-        window.location.href = data.url; //Redirect to home page
+        location.reload();
+        window.location.href = data.url;  //Redirect to home page
+        location.reload();
+        
     });
 });

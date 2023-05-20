@@ -87,7 +87,7 @@ module.exports = {
     getRecentPosts: async function (req, res, next) {
         try {
             var[rows, _] = await db.execute(
-                `select * from posts order by datePosted desc limit 2;`
+                `select * from posts order by datePosted desc limit 5;`
             )
             res.locals.posts = rows;
             next();

@@ -1,4 +1,14 @@
-<div class = "img-group">
-    <img src="/{{thumbnail}}" class="img">
-    <p class="img-title">{{title}}</p>
+<div name="full-card"
+     class="full-card"
+     data-postId={{this.id}}>
+    <div class="overlay">
+        <div class="covering">
+            <div class="view-video">View</div>
+        </div>
+    </div>
+
+    <div class="img-group">
+        <img src="/{{thumbnail}}" class="img">
+        <p class="img-title">{{title}}</p>
+    </div>
 </div>
