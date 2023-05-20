@@ -1,5 +1,4 @@
 <body>
-
     <main>
         <h2>{{user.username}}'s Profile</h2>
         <article id="user_details">
@@ -7,7 +6,7 @@
         
         <div id="image-list" class="image-list">
             {{#each posts}}
-                {{> card this}}
+                {{> profileCard this}}
             {{/each}}
     </div>
 

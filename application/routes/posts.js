@@ -25,7 +25,7 @@ router.post("/create",
     upload.single("post-video"),
     makeThumbnail,
     async function (req, res, next) {
-        
+
         var { post_title, post_description } = req.body;
         var { path, thumbnail } = req.file;
         var { userId } = req.session.user;
@@ -37,7 +37,7 @@ router.post("/create",
                 [post_title, post_description, path, thumbnail, userId]
             );
             if (insertResult && insertResult.affectedRows == 1) {
-                var {insertId} = insertResult
+                var { insertId } = insertResult
                 req.flash("success", "Your post was created!");
                 return req.session.save(function (error) {
                     return res.redirect(`/posts/viewpost/${insertId}`);
@@ -51,11 +51,12 @@ router.post("/create",
         res.end();
     });
 
-//Make Title the name of the video  
+//View Post
 router.get("/viewpost/:id(\\d+)", getPostForUserById, getCommentsForPostByID, async function (req, res, next) {
-    res.render('viewpost', {title: `${res.locals.currentPost.title}`});
+    res.render('viewpost', { title: `${res.locals.currentPost.title}` });
 })
 
+//Search for a post
 router.get("/search", async function (req, res, next) {
     var { searchValue } = req.query;
 
@@ -77,8 +78,21 @@ router.get("/search", async function (req, res, next) {
     }
 });
 
-router.delete("/delete", function (req, res, next) {
+router.post("/delete", async function (req, res, next) {
+    var { postId } = req.body;
+    console.log(req.body);
+    try {
+        var [rows, _] = await db.execute(
+            `delete from comments where fk_post = ?;`
+            , [postId]);
+        var[rows2, _ ] = await db.execute(`
+        delete from posts where id = ?;`,
+        [postId]);
+    } catch (error) {
+        next(error);
+    }
 
+    return res.redirect(`/users/profile/${req.session.user.userId}`);
 });
 
 module.exports = router;

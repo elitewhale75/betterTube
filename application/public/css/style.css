@@ -229,6 +229,7 @@ button:active{
     padding-top: 10px;
     padding-left: 10px;
     padding-right:10px;
+    border-radius: 0.75rem;
     background-color: rgb(94, 94, 94);
 }
 
@@ -253,6 +254,7 @@ button:active{
     height: 180.33px;
     position: fixed;
     background-color: rgba(63, 63, 63, 0);
+    border-radius: 0.75rem;
 }
 .covering:hover{
   background-color: rgba(63, 63, 63, 0.75);
@@ -267,11 +269,26 @@ button:active{
 
 /*Styling for video Text*/
 .img-title{
-  margin: 8px;
   padding:0px;
   font-size: 100%;
   font-weight: 600;
   color:whitesmoke;
+  display:flex;
+  flex-flow: column;
+  justify-items: center;
+  width: 161.33px;
+  gap: 25px
+}
+
+.delete-button{
+  background-color: red;
+  font-weight: 600;
+  padding:3px;
+}
+
+.delete-button:active{
+  background-color:rgb(191, 2, 2);
+  box-shadow:  2px -2px 5px black;
 }
 
 /*Styling for Footer*/
