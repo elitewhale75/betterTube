@@ -58,6 +58,39 @@ nav > ul > li a, p {
   font-weight: 600;
 }
 
+/*Mouse over Anchor tags and Dropdown Elements*/
+nav > ul > li a:hover, nav > ul > li p:hover {
+  cursor:pointer;
+  margin:0;
+  background-color: rgb(22, 104, 17);
+  border-radius: var(--text-rounded-corners);
+}
+
+/*Dropdown*/
+.dropdown{
+  background-color: var(--site-theme);
+  border-radius: var(--text-rounded-corners);
+  border: 2px solid whitesmoke;
+  padding-left: 0px;
+  width: 4.9%;
+  padding: 10px;
+  margin:0px;
+  display: none;
+  flex-direction: column;
+  position: absolute !important;
+
+}
+
+/*Logout Elements*/
+.link-to-user, .logout{
+  display: inline-block;
+  padding:9%
+}
+
+/*Show Dropdown*/
+.show{display:flex}
+
+
 /*Search Form*/
 .search-form{
   display: flex;
@@ -79,34 +112,6 @@ nav > ul > li a, p {
 
 }
 
-/*Mouse over Anchor tags and Dropdown*/
-nav > ul > li a:hover, li p:hover {
-  cursor:pointer;
-  margin:0;
-  background-color: rgb(22, 104, 17);
-  border-radius: var(--text-rounded-corners);
-}
-
-/*Dropdown*/
-.dropdown{
-  background-color: var(--site-theme);
-  border-radius: var(--text-rounded-corners);
-  border: 2px solid whitesmoke;
-  padding-left: 0px;
-  padding: 10px;
-  margin:0px;
-  display: none;
-  flex-direction: column;
-  position: absolute !important;
-
-}
-
-.dropdown > p, a {
-  text-align: center;
-}
-
-/*Show Dropdown*/
-.show{display:flex}
 
 body {
   font: 0.875rem "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -196,6 +201,10 @@ button:active{
   box-shadow:  2px -2px 5px black;
 }
 
+.register{
+  width: 100px;
+}
+
 /*Listing of Images in index.html*/
 .image-list{
   display: grid;
@@ -207,6 +216,10 @@ button:active{
   padding-top: 15px;
   padding-bottom: 150px;
   
+}
+
+.video{
+  margin-top: 10px;
 }
 
 /*Overlay for the video cards*/
@@ -282,12 +295,15 @@ button:active{
   text-overflow: ellipsis;
 }
 
+/*Delete Button for videos on profile page*/
 .delete-button{
   background-color: red;
   font-weight: 600;
   padding:3px;
   width: 100%;
   box-shadow:  -2px 2px 5px black;
+  position:relative;
+  top:-10px
 }
 
 .delete-button:hover{
@@ -299,6 +315,164 @@ button:active{
   box-shadow:  2px -2px 5px black;
 }
 
+/*Post Video Page*/
+
+.post{
+  text-align: left;
+  margin:3px;
+}
+
+.post-title{
+  font-weight: 1000;
+  font-size: large;
+  color:black;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.details-box{
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+.post-details{
+  color:black;
+}
+
+.description-box{
+  font-weight: 700;
+  margin-left: 20px;
+  margin-bottom:20px;
+}
+
+.description{
+  font-weight: 1000;
+  margin-left: 30px
+}
+
+.comment-group{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.enter-comment{
+  position: relative;
+  width: 300px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+}
+
+.comment-field{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #222222;
+  width: 300px;
+  border: none;
+  border-bottom: solid purple 1.5px;
+  padding-bottom: 10px;
+  position: relative;
+  background: none;
+  z-index: 5;
+}
+
+.button-wrap{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-comment, .register-button, .login-button, .form-button{
+  margin-top: 10px;
+  width: 70px;
+  height: 22px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: whitesmoke;
+  background-color: rgb(169, 0, 169);
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.form-button{
+  width:100px;
+}
+
+.register-button{
+  margin-left: 10px;
+  width: 100px;
+}
+
+.register-link{
+  margin-top: 10px;
+  font-weight: 800;
+}
+
+
+.submit-comment:hover, .register-button:hover,.login-button:hover, .form-button:hover {
+  background-color: rgb(197, 0, 197);
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.submit-comment:active .register-button:active,.login-button:active, .form-button:active{
+  box-shadow: none;
+  background-color: rgb(171, 0, 171);
+}
+
+.comment-field:focus{
+  outline: none;
+}
+
+.comment-section{
+  margin-left: 30px;
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 90%;
+}
+
+.comment-wrapper{
+  margin-bottom: 10px;
+}
+
+.comment-details{
+  display: flex;
+  justify-content: space-between;
+  width:100%;
+  margin-bottom: 7px;
+  font-size: 1.05rem;
+}
+
+.comment-date{
+  text-align: right;
+  color: black;
+  font-size: 0.9rem;
+}
+
+.comment-text{
+  text-align: left;
+  margin-left: 15px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.break{
+  margin: 5px;
+  padding:1px;
+  background-color: purple;
+}
+
 /*Styling for Footer*/
 .site-footer{
   color: whitesmoke;
@@ -306,6 +480,32 @@ button:active{
   text-align: center;
   padding: 12px;
   margin:10px;
+}
+
+.flash-message-container{
+  display: grid;
+  justify-content: center;
+  width:100%;
+  margin: 0px;
+}
+
+.alert-error,.alert-success{
+  margin:0px;
+  padding:10px;
+  margin-top: 5px;
+  border-radius: 0.7rem;
+  box-shadow:  -2px 2px 5px black;
+  font-weight: 1000;
+  text-align: center;
+}
+
+.alert-error{
+  background-color: rgb(235, 0, 0);
+}
+
+.alert-success{
+  color:whitesmoke;
+  background-color: green;
 }
 
 /*

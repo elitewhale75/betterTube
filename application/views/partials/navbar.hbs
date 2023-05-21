@@ -4,9 +4,6 @@
     <ul>
         <li><a href="/" rel="noreferrer noopener">
                 Home</a></li>
-
-        <li><a href="/registration" rel="noreferrer noopener">
-                Registration</a></li>
         <li class = "search-tab">
                 <form class = "search-form" action="/posts/search"
                 method="GET"
@@ -26,8 +23,11 @@
         <li id="user-context-tab">
                 <p id="greeting">Hello {{user.username}}</p>
                 <div id = "dropdown" class="dropdown">
-                        <a id="link-to-user" href="/users/profile/{{user.userId}}">Profile</a>
-                        <p id="logout">Logout</p>
+                        <a id="link-to-user" 
+                           href="/users/profile/{{user.userId}}"
+                           class="link-to-user">Profile</a>
+                        <p id="logout"
+                           class="logout">Logout</p>
                 </div>
             </li>
         {{else}}

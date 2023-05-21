@@ -21,7 +21,9 @@ router.post('/create', isLoggedIn, async function(req,res,next){
                 });
             }else{
                 req.flash("error", "Could not insert comment");
-                return req.session.save(function (error) {});
+                return req.session.save(function (error) {
+                    next(error);
+                });
             }
     } catch (error) {
         console.log("idiot")

@@ -1,25 +1,58 @@
 <body>
     <main>
-        <video width="720" height="480" src="/{{currentPost.video}}" controls type="video/webm"></video>
 
-        <article id="post">
-            <h2 id="post_title">{{currentPost.title}}</h2>
-            <section id="post_details">
-                <p id="author">Author: {{currentPost.username}}</p>
-                <p id="creation_time">Creation Time: {{formatDateString currentPost.datePosted}}</p>
-                <div id="video"></div>
+        <div id="video">
+            <video 
+            class="video"
+            width="1080" height="480" 
+                   src="/{{currentPost.video}}" 
+                   controls type="video/webm">
+            </video>
+        </div>
+        <article id="post" class="post">
+            <div class="break"></div>
+
+            <p id="post_title" class="post-title">{{currentPost.title}}</p>
+            <section id="post_details" class="details-box">
+                <p id="author" class="post-details"> <em>Author: {{currentPost.username}}</em></p>
+                <p id="creation_time" class="post-details">
+                    <em>
+                        Creation Time: {{formatDateString currentPost.datePosted}}
+                    </em>
+                </p>
             </section>
-        </article>
-        <article class="comment-group">
-            <textarea id="comment-field" class="comment-field" autocomplete="off"></textarea>
-            <button type="submit" class="submit-comment" id="submit-comment"
-                data-postid="{{currentPost.id}}">Submit</button>
 
+            <div class="description-box"> Description
+                <section class="description">
+                    {{currentPost.description}}
+                </section>
+            </div>
+        </article>
+
+        <div class="break"></div>
+
+        <article class="comment-group">
+            <section class="enter-comment">
+                <input type="text" 
+                id="comment-field" 
+                class="comment-field" 
+                autocomplete="off"
+                name="comment-field"
+                placeholder="Add Comment">
+                <div class="">
+                    <button type="submit" class="submit-comment" 
+                        id="submit-comment"
+                        data-postid="{{currentPost.id}}">Submit</button>
+                </div>
+
+            </section>
             <section id = "comment-section" class="comment-section">
                 {{#each currentPost.comments}}
                 {{> comment}}
                 {{/each}}
             </section>
+
+            <div class="break"></div>
 
             <script>
                 //Clear text area
@@ -51,16 +84,21 @@
                             var comments = document.getElementById('comment-section');
                             let commentFragment = document.createElement('template');
                             commentFragment.innerHTML = 
-                            `<div class = "comment" id="comment">
-                                <strong class = "comment-author">${data.username}</strong>
-                                <span class="commennt-date">${(new Date()).toLocaleString(
+                            `<section class="comment wrapper">
+                                <div class = "comment-details" id="comment">
+                                    <strong>
+                                        <em class = "comment-author">@${data.username}</em>
+                                    </strong>
+                                    
+                                    <p class="comment-date"><em>${(new Date()).toLocaleString(
                                     "en-us", {
                                         dateStyle: "long",
                                         timeStyle: "medium"
                                     }
-                                    )}</span>
+                                    )}</em></p>
+                                </div>
                                 <div class = "comment-text">${data.comment}</div>
-                            </div>`;
+                            </section>;`
                             comments.append(commentFragment.content.firstChild);
                             
 

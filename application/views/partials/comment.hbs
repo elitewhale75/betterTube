@@ -1,5 +1,10 @@
-<div class = "comment" id="comment">
-    <strong class = "comment-author">{{this.username}}</strong>
-    <span class="commennt-date">{{formatDateString this.createdAt}}</span>
+<section class="comment-wrapper">
+    <div class = "comment-details" id="comment">
+        <strong>
+            <em class = "comment-author">@{{this.username}}</em>
+        </strong>
+        <p class="comment-date"><em>{{formatDateString this.createdAt}}</em></p>
+    </div>
     <div class = "comment-text">{{this.content}}</div>
-</div>
+
+</section>

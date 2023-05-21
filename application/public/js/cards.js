@@ -23,8 +23,7 @@ let deleteButton = document.getElementsByClassName("delete-button");
         }).
         then(data => {
             location.reload();
-            window.location.href = data.url;  //Redirect to profile
-            location.reload();
+
         }).
         catch(err => {console.log(err)});
     })

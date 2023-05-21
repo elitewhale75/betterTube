@@ -23,12 +23,40 @@
     <body>
         {{> header}}
         {{> navbar}}
-        {{#if (nonEmptyObject messages)}}
-            {{> flashmessage this}}
+        {{log messages}}
+        <div class="flash-message-container">
+            {{#if messages.success}}
+
+                {{> flashmessage this}}
+
+            {{else if messages.error}}
+
+                {{> flashmessage this}}
+
         {{/if}}
+        </div>
+        
         {{{body}}}
+
     </body>
 
     {{> footer}}
+
+<script>
+
+    const flashMessage = document.getElementById('flash-message');
+
+    const timeoutDuration = 5000; // 5 seconds
+
+    if (flashMessage) {
+        const messageType = flashMessage.classList.contains('alert-success') ? 'success' : 'error';
+        setTimeout(() => {
+            flashMessage.parentNode.removeChild(flashMessage);
+        }, timeoutDuration);
+    }
+
+</script>
+
+
 
 </html>

@@ -93,6 +93,8 @@ router.post("/delete", async function (req, res, next) {
     }
 
     return res.redirect(`/users/profile/${req.session.user.userId}`);
+
+    
 });
 
 module.exports = router;

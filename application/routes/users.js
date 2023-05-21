@@ -105,7 +105,10 @@ router.post('/logout', isLoggedIn, function(req,res,end){
       next(err);
     }
   });
-  return res.redirect('/');
+  req.flash("success", `You have logged out`);
+      req.session.save(function(error){
+        return res.redirect('/');
+    });
 });
 
 module.exports = router;
