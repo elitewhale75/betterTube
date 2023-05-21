@@ -98,6 +98,7 @@ router.get("/profile/:id(\\d+)", isLoggedIn, isMyProfile, getPostByUserId, funct
   res.render('profile' , { title: 'User Profile'});
 })  
 
+
 // Logout
 router.post('/logout', isLoggedIn, function(req,res,end){
   req.session.destroy(function(err){
@@ -105,10 +106,7 @@ router.post('/logout', isLoggedIn, function(req,res,end){
       next(err);
     }
   });
-  req.flash("success", `You have logged out`);
-      req.session.save(function(error){
-        return res.redirect('/');
-    });
+  return res.redirect('/');
 });
 
 module.exports = router;
