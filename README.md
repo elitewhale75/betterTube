@@ -10,18 +10,26 @@ Please follow the instructions below and fill in the information requested when 
 
 |               | Information   |
 |:-------------:|:-------------:|
-| Student Name  | name-here     |
-| Student ID    | id-here       |
-| Student Email | email-here    |
+| Student Name  | Vignesh Guruswami     
+| Student ID    | 922379195       
+| Student Email | vguruswami@sfsu.edu    
 
 
 
 # Build/Run Instructions
 
 ## Build Instructions
-1. steps here
-2. steps here
+1. After cloning the repository, create a file called ".env" in the application folder. The env file will store environment variables for accessing a database
+DB_HOST = "localhost"
+DB_NAME = "csc317db"
+DB_USER= "root"
+DB_PASSWORD="123"
+PORT=3000
+
+2. while in the application folder run the command "npm install." This will stall the dependencies for the express app
+
+3. Finally run "npm run builddb" to set up the database connection
 
 ## Run Instructions
-1. steps here
-2. steps here 
+1. Move to the application folder and run the command "npm start"
+2. This will launch the web app. Type the correct port into the url tab of the search browser "localhost:3000/"
